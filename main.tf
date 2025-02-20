@@ -1,3 +1,6 @@
+resource "grafana_folder" "this" {
+  title = var.folder_name
+}
 locals {
 
   duration_multiplier = {
@@ -6,10 +9,6 @@ locals {
     "h" = 60 * 60
     "d" = 60 * 60 * 24
   }
-}
-
-resource "grafana_folder" "this" {
-  title = var.folder_name
 }
 
 resource "grafana_rule_group" "this" {
@@ -33,14 +32,14 @@ resource "grafana_rule_group" "this" {
       exec_err_state = rule.value.execErrState
       for            = rule.value.for
       annotations = merge(
-        try(rule.value.annotations, null),
+        rule.value.annotations,
         try(var.annotations, null),
         try(var.rule_groups.annotations, null),
         try(var.rule_groups.rule_group["${each.key}"].annotations, null),
         try(var.rule_groups.rule_group["${each.key}"].rule["${rule.key}"].annotations, null)
       )
       labels = merge(
-        try(rule.value.labels, null),
+        rule.value.labels,
         try(var.labels, null),
         try(var.rule_groups.labels, null),
         try(var.rule_groups.rule_group["${each.key}"].labels, null),
@@ -90,8 +89,8 @@ resource "grafana_rule_group" "this" {
             refId = data.value.refId,
           }))
           relative_time_range {
-            from = try(data.value.relativeTimeRange.to, 0)
-            to   = try(data.value.relativeTimeRange.from, 0)
+            from = local.default_query_time_range.from
+            to   = local.default_query_time_range.to
           }
         }
       }
