@@ -32,14 +32,14 @@ resource "grafana_rule_group" "this" {
       exec_err_state = rule.value.execErrState
       for            = rule.value.for
       annotations = merge(
-        rule.value.annotations,
+        try(rule.value.annotations, null),
         try(var.annotations, null),
         try(var.rule_groups.annotations, null),
         try(var.rule_groups.rule_group["${each.key}"].annotations, null),
         try(var.rule_groups.rule_group["${each.key}"].rule["${rule.key}"].annotations, null)
       )
       labels = merge(
-        rule.value.labels,
+        try(rule.value.labels, null),
         try(var.labels, null),
         try(var.rule_groups.labels, null),
         try(var.rule_groups.rule_group["${each.key}"].labels, null),
@@ -89,8 +89,8 @@ resource "grafana_rule_group" "this" {
             refId = data.value.refId,
           }))
           relative_time_range {
-            from = local.default_query_time_range.from
-            to   = local.default_query_time_range.to
+            from = try(data.value.relativeTimeRange.from, 0)
+            to   = try(data.value.relativeTimeRange.to, 0)
           }
         }
       }
