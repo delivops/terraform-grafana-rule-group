@@ -29,8 +29,8 @@ resource "grafana_rule_group" "this" {
     content {
       name           = rule.value.title
       condition      = rule.value.condition
-      no_data_state  = rule.value.no_data_state
-      exec_err_state = rule.value.exec_err_state
+      no_data_state  = rule.value.noDataState
+      exec_err_state = rule.value.execErrState
       for            = rule.value.for
       annotations = merge(
         try(rule.value.annotations, null),

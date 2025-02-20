@@ -29,6 +29,7 @@ module "EC2-alarms" {
   static_rule_groups = yamldecode(file("EC2-alarms.yaml"))
   rule_groups        = {}
 }
+```
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
