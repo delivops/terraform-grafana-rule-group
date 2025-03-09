@@ -1,4 +1,9 @@
 resource "grafana_folder" "this" {
+  count = var.create_folder ? 1 : 0
+  title = var.folder_name
+}
+data "grafana_folder" "existing" {
+  count = var.create_folder ? 0 : 1
   title = var.folder_name
 }
 locals {
@@ -14,7 +19,7 @@ locals {
 resource "grafana_rule_group" "this" {
   for_each   = { for group in var.static_rule_groups.groups : group.name => group }
   name       = each.value.name
-  folder_uid = grafana_folder.this.uid
+  folder_uid = var.create_folder ? grafana_folder.this[0].uid : data.grafana_folder.existing[0].uid
   interval_seconds = sum(
     [
       for duration in regexall("([0-9]+)([a-z]+)", each.value.interval) : duration[0] * local.duration_multiplier[duration[1]]

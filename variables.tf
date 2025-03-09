@@ -33,3 +33,9 @@ variable "rule_groups" {
 locals {
   expression_datasource_uid = -100
 }
+
+variable "create_folder" {
+  description = "Whether to create a new folder or use an existing one with the same name"
+  type        = bool
+  default     = true
+}
