@@ -54,12 +54,14 @@ No modules.
 |------|------|
 | [grafana_folder.this](https://registry.terraform.io/providers/grafana/grafana/latest/docs/resources/folder) | resource |
 | [grafana_rule_group.this](https://registry.terraform.io/providers/grafana/grafana/latest/docs/resources/rule_group) | resource |
+| [grafana_folder.existing](https://registry.terraform.io/providers/grafana/grafana/latest/docs/data-sources/folder) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_annotations"></a> [annotations](#input\_annotations) | n/a | `map(string)` | `{}` | no |
+| <a name="input_create_folder"></a> [create\_folder](#input\_create\_folder) | Whether to create a new folder or use an existing one with the same name | `bool` | `true` | no |
 | <a name="input_datasource_type"></a> [datasource\_type](#input\_datasource\_type) | n/a | `string` | `"cloudwatch"` | no |
 | <a name="input_datasource_uid"></a> [datasource\_uid](#input\_datasource\_uid) | n/a | `string` | `""` | no |
 | <a name="input_folder_name"></a> [folder\_name](#input\_folder\_name) | n/a | `string` | n/a | yes |
