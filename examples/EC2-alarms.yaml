@@ -1,0 +1,79 @@
+apiVersion: 1
+groups:
+    - orgId: 1
+      name: every-5m
+      folder: EC2 Alarms
+      interval: 5m
+      rules:
+        - uid: decqqlek2don4e
+          title: High CPU utilization
+          condition: A
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: fecc5dfgzgxdsf
+              model:
+                editorMode: code
+                expr: avg by (host_name) (sum by(cpu,host_name) (rate(system_cpu_time_seconds_total{state!="idle"}[5m]))) / avg by (host_name) (sum by(cpu,host_name) (rate(system_cpu_time_seconds_total{}[5m]))) > 0.8
+                instant: true
+                intervalMs: 300000
+                legendFormat: __auto
+                maxDataPoints: 43200
+                range: false
+                refId: A
+          noDataState: Alerting
+          execErrState: Alerting
+          for: 5m
+          isPaused: false
+          notification_settings:
+            receiver: grafana-default-sns
+        - uid: cecqqw85yqha8f
+          title: 'High Memory utilization '
+          condition: A
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: fecc5dfgzgxdsf
+              model:
+                editorMode: code
+                expr: sum by(host_name) (system_memory_usage_bytes{state="free"})/sum by(host_name) (system_memory_usage_bytes{})<0.1
+                instant: true
+                intervalMs: 300000
+                legendFormat: __auto
+                maxDataPoints: 43200
+                range: false
+                refId: A
+          noDataState: NoData
+          execErrState: Error
+          for: 5m
+          isPaused: false
+          notification_settings:
+            receiver: grafana-default-sns
+        - uid: decx9g8bxagowd
+          title: 'Low CPU utilization '
+          condition: A
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 600
+                to: 0
+              datasourceUid: fecc5dfgzgxdsf
+              model:
+                editorMode: code
+                expr: avg by (host_name) (sum by(cpu,host_name) (rate(system_cpu_time_seconds_total{state!="idle"}[5m]))) / avg by (host_name) (sum by(cpu,host_name) (rate(system_cpu_time_seconds_total{}[5m]))) < 0.02
+                instant: true
+                intervalMs: 300000
+                legendFormat: __auto
+                maxDataPoints: 43200
+                range: false
+                refId: A
+          noDataState: Alerting
+          execErrState: Alerting
+          for: 5m
+          isPaused: false
+          notification_settings:
+            receiver: grafana-default-sns

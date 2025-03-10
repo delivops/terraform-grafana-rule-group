@@ -25,7 +25,7 @@ module "EC2-alarms" {
   #version = xxx
 
   folder_name        = "EC2-alerts"
-  datasource_uid     = local.cloudwatch_datasource_uid
+  datasource_names    = local.datasource_names
   static_rule_groups = yamldecode(file("EC2-alarms.yaml"))
   rule_groups        = {}
 }

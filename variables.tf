@@ -12,9 +12,8 @@ variable "annotations" {
   default = {}
 }
 
-variable "datasource_uid" {
-  type    = string
-  default = ""
+variable "datasource_names" {
+  type    = list(string)
 }
 
 variable "static_rule_groups" {
@@ -28,12 +27,11 @@ variable "datasource_type" {
 
 variable "rule_groups" {
   type = any
+  default = {}
 }
-
 locals {
   expression_datasource_uid = -100
 }
-
 variable "create_folder" {
   description = "Whether to create a new folder or use an existing one with the same name"
   type        = bool
