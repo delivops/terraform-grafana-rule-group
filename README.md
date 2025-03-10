@@ -54,6 +54,7 @@ No modules.
 |------|------|
 | [grafana_folder.this](https://registry.terraform.io/providers/grafana/grafana/latest/docs/resources/folder) | resource |
 | [grafana_rule_group.this](https://registry.terraform.io/providers/grafana/grafana/latest/docs/resources/rule_group) | resource |
+| [grafana_data_source.this](https://registry.terraform.io/providers/grafana/grafana/latest/docs/data-sources/data_source) | data source |
 | [grafana_folder.existing](https://registry.terraform.io/providers/grafana/grafana/latest/docs/data-sources/folder) | data source |
 
 ## Inputs
@@ -62,11 +63,11 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_annotations"></a> [annotations](#input\_annotations) | n/a | `map(string)` | `{}` | no |
 | <a name="input_create_folder"></a> [create\_folder](#input\_create\_folder) | Whether to create a new folder or use an existing one with the same name | `bool` | `true` | no |
+| <a name="input_datasource_names"></a> [datasource\_names](#input\_datasource\_names) | n/a | `list(string)` | n/a | yes |
 | <a name="input_datasource_type"></a> [datasource\_type](#input\_datasource\_type) | n/a | `string` | `"cloudwatch"` | no |
-| <a name="input_datasource_uid"></a> [datasource\_uid](#input\_datasource\_uid) | n/a | `string` | `""` | no |
 | <a name="input_folder_name"></a> [folder\_name](#input\_folder\_name) | n/a | `string` | n/a | yes |
 | <a name="input_labels"></a> [labels](#input\_labels) | n/a | `map(string)` | `{}` | no |
-| <a name="input_rule_groups"></a> [rule\_groups](#input\_rule\_groups) | n/a | `any` | n/a | yes |
+| <a name="input_rule_groups"></a> [rule\_groups](#input\_rule\_groups) | n/a | `any` | `{}` | no |
 | <a name="input_static_rule_groups"></a> [static\_rule\_groups](#input\_static\_rule\_groups) | n/a | `any` | n/a | yes |
 
 ## Outputs
